@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MANSORY Digital Showroom Experience">
+  <title>MANSORY Digital Showroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Syncopate:wght@400;700&family=Barlow:wght@300;400;500;700&family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="light-theme">
+
+  <div id="transitionOverlay" class="transition-overlay"></div>
+
+  <button id="soundToggle" class="sound-toggle" aria-label="Toggle Sound">Sound: Off</button>
+
+  <main id="app" class="app hidden">
+    <section id="landing" class="page page-landing active" aria-labelledby="landingTitle">
+      <div class="landing-film" data-cinematic-root>
+        <section class="landing-hero scene-panel scene-hero" data-scene="hero">
+          <div class="hero-background-layer" aria-hidden="true">
+            <div id="heroReactBackground" class="hero-react-background">
+            </div>
+          </div>
+
+          <div class="hero-container">
+            <div class="hero-content-col hero-content-full">
+              <div class="hero-badge">
+                <span>MANSORY DIGITAL SHOWROOM</span>
+              </div>
+
+              <div class="hero-brand-mark">
+                <svg viewBox="0 0 200 60" aria-hidden="true">
+                  <text x="0" y="45" font-family="'Cormorant Garamond', serif" font-size="48" font-weight="700"
+                    fill="currentColor" letter-spacing="3">Nath Mansory Studio</text>
+                </svg>
+              </div>
+
+              <h1 id="landingTitle" class="hero-headline">
+                Elite Automotive<br>
+                <span class="headline-accent">Bespoke Engineering</span>
+              </h1>
+
+              <p class="hero-description">
+                Commissioned builds, handcrafted interiors, and performance transformations for the world's most
+                discerning collectors. Experience the atelier.
+              </p>
+
+              <div class="hero-ctas">
+                <button class="btn-primary" data-target="showroom" id="enterShowroomBtn">
+                  <span>Explore Showroom</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+                <button class="btn-secondary" data-target="contact">
+                  <span>Begin Your Commission</span>
+                </button>
+              </div>
+
+              <div class="hero-trust-indicators">
+                <div class="trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                  <span>Limited Production</span>
+                </div>
+                <div class="trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>15+ Years Legacy</span>
+                </div>
+                <div class="trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <span>Global Clientele</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-scroll-cue" aria-hidden="true">Scroll</p>
+        </section>
+
+        <section class="scene-panel scene-a" data-scene="a" aria-labelledby="sceneATitle">
+          <div class="scene-shell split-scene">
+            <div class="scene-copy">
+              <p class="scene-eyebrow">Services Overview</p>
+              <h2 id="sceneATitle">Craftsmanship that improves beauty, safety, and long-term durability.</h2>
+              <p>
+                From decorative hardscaping to structural restoration, our crew combines engineering precision with
+                clean execution so every build performs and looks exceptional.
+              </p>
+              <div class="services-grid">
+                <article class="service-card">
+                  <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="3" y="3" width="7" height="7" rx="1" />
+                      <rect x="14" y="3" width="7" height="7" rx="1" />
+                      <rect x="3" y="14" width="7" height="7" rx="1" />
+                      <rect x="14" y="14" width="7" height="7" rx="1" />
+                    </svg>
+                  </div>
+                  <h3>Brickwork</h3>
+                  <p>Crisp, durable brick installations that elevate frontage and reduce maintenance headaches.</p>
+                </article>
+                <article class="service-card">
+                  <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 20h16" />
+                      <path d="M4 14h16" />
+                      <path d="M4 8h16" />
+                      <path d="M8 4v16" />
+                      <path d="M16 4v16" />
+                    </svg>
+                  </div>
+                  <h3>Stone Patios</h3>
+                  <p>Custom outdoor living surfaces designed for comfort, drainage performance, and lasting finish.</p>
+                </article>
+                <article class="service-card">
+                  <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 22V12" />
+                      <path d="M20 22V12" />
+                      <path d="M12 22V4" />
+                      <path d="M12 4l-4 4" />
+                      <path d="M12 4l4 4" />
+                    </svg>
+                  </div>
+                  <h3>Retaining Walls</h3>
+                  <p>Engineered walls that stabilize slopes, improve site usability, and protect foundations.</p>
+                </article>
+                <article class="service-card">
+                  <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  </div>
+                  <h3>Restoration</h3>
+                  <p>Repointing and structural repair that restores integrity while preserving original character.</p>
+                </article>
+              </div>
+              <div class="credentials-strip" aria-label="Credentials">
+                <span>Licensed Contractor</span>
+                <span>OSHA-Safe Crews</span>
+                <span>Warranty-Backed Work</span>
+              </div>
+              <p class="service-area-note">Service Area: Greater Metro Region and surrounding counties.</p>
+              <button class="cta-button small" data-target="contact">Get My Quote</button>
+            </div>
+            <div class="scene-media scene-media-depth">
+              <figure class="service-visual-frame">
+                <img class="service-visual-image" src="assets/images/mansory-rear.webp" alt="MANSORY rear aero view"
+                  onerror="this.onerror=null;this.src='assets/images/mansory-cullinan.jpg';" loading="lazy">
+                <div class="service-visual-glow" aria-hidden="true"></div>
+                <figcaption class="service-visual-badge">MANSORY SIGNATURE AERO</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene-panel scene-b" data-scene="b" aria-labelledby="sceneBTitle">
+          <div class="scene-shell">
+            <p class="scene-eyebrow">Project Portfolio</p>
+            <h2 id="sceneBTitle">Recent masonry builds delivered with precision and clean finish quality.</h2>
+            <div class="gallery-stage">
+              <div class="gallery-track">
+                <article class="gallery-card">
+                  <figure>
+                    <img class="gallery-image" src="assets/images/mansory-cullinan.jpg"
+                      alt="Rolls-Royce Cullinan portfolio feature" decoding="async" loading="lazy"
+                      onerror="this.onerror=null;this.src='assets/images/mansory-rear.webp';">
+                    <figcaption class="gallery-caption">Rolls-Royce Cullinan in a monochrome luxury specification with
+                      an imposing front studio stance.</figcaption>
+                  </figure>
+                </article>
+                <article class="gallery-card">
+                  <figure>
+                    <img class="gallery-image" src="assets/images/Carbonado X.webp"
+                      alt="Carbonado X portfolio feature" decoding="async" loading="lazy"
+                      onerror="this.onerror=null;this.src='assets/images/mansory-rear.webp';">
+                    <figcaption class="gallery-caption">Carbonado X with a sharp front aero treatment and deep black
+                      performance-focused presence.</figcaption>
+                  </figure>
+                </article>
+                <article class="gallery-card">
+                  <figure>
+                    <img class="gallery-image" src="assets/images/Mansory-Jesko.jpg" alt="Jesko portfolio feature"
+                      decoding="async" loading="lazy"
+                      onerror="this.onerror=null;this.src='assets/images/mansory-rear.webp';">
+                    <figcaption class="gallery-caption">Jesko showcased in an atelier setting with exposed carbon
+                      surfaces and gold-accent detailing.</figcaption>
+                  </figure>
+                </article>
+                <article class="gallery-card">
+                  <figure>
+                    <img class="gallery-image" src="assets/images/mansory-koenigsegg-showroom.jpg" decoding="async"
+                      loading="lazy" alt="MANSORY hypercar showroom image"
+                      onerror="this.onerror=null;this.src='assets/images/mansory-rear.webp';">
+                    <figcaption class="gallery-caption">MANSORY showroom hypercar with carbon and gold performance
+                      accents.</figcaption>
+                  </figure>
+                </article>
+              </div>
+            </div>
+            <div class="portfolio-cta">
+              <button class="cta-button small" data-target="contact">Discuss My Project</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene-panel scene-d" data-scene="d" aria-labelledby="sceneDTitle">
+          <div class="scene-shell about-shell">
+            <p class="scene-eyebrow">Why Choose Nath Mansory Studio</p>
+            <h2 id="sceneDTitle">Craftsmanship, Integrity, and a Commitment to Lasting Value</h2>
+            <div class="about-grid">
+              <div class="about-content">
+                <p class="about-lead">With over 15 years of experience, Nath Mansory Studio Masonry Studio delivers refined
+                  masonry solutions that combine engineering precision with aesthetic excellence. Every project is
+                  handled with meticulous attention to detail, ensuring results that stand the test of time.</p>
+                <ul class="about-highlights">
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    Licensed & Insured
+                  </li>
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    15+ Years of Proven Experience
+                  </li>
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Warranty-Backed Workmanship
+                  </li>
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    Customer-Focused Process
+                  </li>
+                </ul>
+              </div>
+              <div class="about-visual">
+                <img src="assets/images/mansory-rear.webp" alt="Masonry project by Nath Mansory Studio"
+                  onerror="this.style.display='none'">
+                <div class="about-visual-overlay"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene-panel scene-c" data-scene="c" aria-labelledby="sceneCTitle">
+          <div class="scene-shell">
+            <p class="scene-eyebrow">Testimonials & Reviews</p>
+            <h2 id="sceneCTitle">Trusted by homeowners and property managers for dependable results.</h2>
+            <div class="testimonial-grid">
+              <article class="testimonial-card">
+                <div class="testimonial-top" aria-hidden="true">
+                  <span class="testimonial-stars"></span>
+                  <span class="testimonial-quote-mark">"</span>
+                </div>
+                <p>
+                  The patio and retaining wall transformed our backyard. Great communication, clear timeline, and
+                  flawless finish.
+                </p>
+                <div class="testimonial-meta">
+                  <h3>Sarah M.</h3>
+                  <span>Homeowner</span>
+                </div>
+              </article>
+              <article class="testimonial-card">
+                <div class="testimonial-top" aria-hidden="true">
+                  <span class="testimonial-stars"></span>
+                  <span class="testimonial-quote-mark">"</span>
+                </div>
+                <p>
+                  They restored the original brick facade beautifully. Professional team, clean worksite, and strong
+                  attention to detail.
+                </p>
+                <div class="testimonial-meta">
+                  <h3>Daniel R.</h3>
+                  <span>Property Owner</span>
+                </div>
+              </article>
+              <article class="testimonial-card">
+                <div class="testimonial-top" aria-hidden="true">
+                  <span class="testimonial-stars"></span>
+                  <span class="testimonial-quote-mark">"</span>
+                </div>
+                <p>
+                  Fast quote, honest pricing, and high-quality craftsmanship. We now use them for all masonry repairs.
+                </p>
+                <div class="testimonial-meta">
+                  <h3>Alem T.</h3>
+                  <span>Facility Manager</span>
+                </div>
+              </article>
+            </div>
+            <div class="brand-stats" role="list">
+              <article class="stat-card" role="listitem">
+                <span class="stat-value" data-target="17">0</span>
+                <span class="stat-label">Years of Experience</span>
+              </article>
+              <article class="stat-card" role="listitem">
+                <span class="stat-value" data-target="420">0</span>
+                <span class="stat-label">Completed Projects</span>
+              </article>
+              <article class="stat-card" role="listitem">
+                <span class="stat-value" data-target="98">0</span>
+                <span class="stat-label">Client Satisfaction %</span>
+              </article>
+            </div>
+            <div class="trust-badges" aria-label="Trust Badges">
+              <span>Licensed</span>
+              <span>Insured</span>
+              <span>Warranty Included</span>
+              <span>Top-Rated Local Team</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="scene-panel scene-final" data-scene="final" aria-labelledby="finalCtaTitle">
+          <div class="scene-shell final-shell">
+            <p class="scene-eyebrow">Request a Quote</p>
+            <h2 id="finalCtaTitle">Tell us about your masonry project and get a clear estimate quickly.</h2>
+            <div class="quote-layout">
+              <div class="quote-intro">
+                <div class="lead-meta">
+                  <p>Phone: +1 (555) 823-1189</p>
+                  <p>Email: hello@Nath Mansory Studiomasonry.com</p>
+                </div>
+                <div class="quote-highlights" aria-label="Quote Highlights">
+                  <article>
+                    <h3>Fast Response</h3>
+                    <p>Receive a clear quote within one business day.</p>
+                  </article>
+                  <article>
+                    <h3>Transparent Scope</h3>
+                    <p>Labor, materials, and timelines outlined upfront.</p>
+                  </article>
+                  <article>
+                    <h3>Built-In Warranty</h3>
+                    <p>All completed work is backed by service warranty.</p>
+                  </article>
+                </div>
+              </div>
+              <form class="lead-form" aria-label="Lead Capture Form">
+                <label>
+                  Full Name
+                  <input type="text" name="fullName" placeholder="Your name" required>
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="you@example.com" required>
+                </label>
+                <label>
+                  Phone
+                  <input type="tel" name="phone" placeholder="+1 (___) ___-____" required>
+                </label>
+                <label class="lead-form-message">
+                  Project Details
+                  <textarea name="projectDetails" rows="4"
+                    placeholder="Tell us what you need built or restored"></textarea>
+                </label>
+                <button type="submit" class="cta-button final-cta">Submit Request</button>
+              </form>
+            </div>
+            <div class="final-cta-row">
+              <button class="ghost-button small" data-target="contact">Open Full Contact Page</button>
+              <button class="ghost-button small" data-target="showroom">View Interactive Showcase</button>
+            </div>
+          </div>
+        </section>
+
+        <footer class="scene-panel landing-footer" data-scene="footer" aria-label="Footer">
+          <div class="scene-shell footer-shell">
+            <div class="footer-grid">
+              <div class="footer-brand">
+                <p class="footer-logo">Nath Mansory Studio MASONRY STUDIO</p>
+                <p class="footer-tagline">Premium masonry built for lasting value.</p>
+              </div>
+              <div class="footer-links">
+                <a href="#contact">Contact</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Projects</a>
+                <a href="#about">About</a>
+              </div>
+              <div class="footer-contact">
+                <p>Phone: +1 (555) 823-1189</p>
+                <p>Email: hello@Nath Mansory Studiomasonry.com</p>
+              </div>
+              <div class="footer-copyright">
+                <p>&copy; 2025 Nath Mansory Studio Masonry Studio. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <section id="showroom" class="page page-showroom" aria-labelledby="showroomTitle">
+      <div class="showroom-floor">
+        <nav class="showroom-navbar">
+          <div class="navbar-brand">ShowroomFloor</div>
+          <div class="navbar-links">
+            <a href="#" class="nav-link active">Collection</a>
+            <a href="#" class="nav-link">Commission</a>
+            <a href="#" class="nav-link">About</a>
+            <button class="back-to-landing-btn" data-target="landing">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Back to Home
+            </button>
+          </div>
+        </nav>
+
+        <section class="showroom-hero">
+          <div class="hero-content">
+            <span class="hero-label">DIGITAL SHOWROOM</span>
+            <h2 class="hero-headline">Compare commissioned builds, scan the key numbers.</h2>
+            <p class="hero-subtext">Explore our curated selection of ultra-limited commission builds from the world's
+              most exclusive automotive atelier.</p>
+          </div>
+          <div class="hero-stats-grid">
+            <div class="stat-card">
+              <span class="stat-number" id="showroomBuildCount">7</span>
+              <span class="stat-label">Cataloged Builds</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="showroomPowerPeak">1,600</span>
+              <span class="stat-label">Peak Output (hp)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="showroomSpeedPeak">415</span>
+              <span class="stat-label">Top Speed (km/h)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">€4.8M</span>
+              <span class="stat-label">Floor Value</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="showroom-filter-bar">
+          <button class="filter-pill active" data-filter="all">Curated Lineup</button>
+          <button class="filter-pill" data-filter="hypercar">Hypercar</button>
+          <button class="filter-pill" data-filter="grandtourer">Grand Tourer</button>
+          <button class="filter-pill" data-filter="suv">SUV</button>
+          <button class="filter-pill" data-filter="limited">Limited Edition</button>
+        </div>
+
+        <div class="showroom-grid-container">
+          <div id="carGrid" class="car-grid" role="list"></div>
+        </div>
+
+        <section class="showroom-cta">
+          <h3>Ready to commission your build?</h3>
+          <p>Speak with our concierge team to discuss your personalized specification.</p>
+          <button class="cta-white">Request Consultation</button>
+          <span class="cta-note">Typical lead time: 12–18 months</span>
+        </section>
+
+        <footer class="showroom-footer">
+          <span>© 2025 ShowroomFloor</span>
+          <button class="back-to-landing-footer-btn" data-target="landing">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Home
+          </button>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <section id="carShowcase" class="page page-car" aria-labelledby="carShowcaseTitle">
+      <button id="backToShowroom" class="top-back">Back to Showroom</button>
+      <div id="showcaseScroll" class="showcase-scroll">
+        <div class="showcase-sticky">
+          <div class="showcase-stage">
+            <h2 id="carShowcaseTitle" class="showcase-car-name"></h2>
+            <p class="showcase-car-subtitle"></p>
+            <div class="stage-scene">
+              <div id="threeViewport" class="three-viewport" aria-hidden="true">
+                <div id="threeLoading" class="three-loading">Initializing 3D Showroom...</div>
+              </div>
+              <div id="carModel" class="car-model legacy-car">
+                <div class="car-glow"></div>
+                <div class="car-body"></div>
+                <div class="car-cabin"></div>
+                <div class="car-wheel car-wheel-front"></div>
+                <div class="car-wheel car-wheel-rear"></div>
+              </div>
+              <div id="angleLabel" class="angle-label">Front Fascia</div>
+            </div>
+          </div>
+          <div id="driverPanel" class="driver-panel">
+            <div class="dashboard">
+              <div class="cluster">
+                <div id="rpmNeedle" class="rpm-needle"></div>
+              </div>
+              <div class="dashboard-overlay-copy">
+                <p id="dashboardIntelligenceLabel" class="dashboard-intelligence-label">
+                  Dashboard Intelligence: Adaptive Performance Matrix
+                </p>
+                <p id="activeMonitoringText" class="dashboard-monitoring-label">
+                  Active Performance Monitoring: Telemetry calibrated in real time.
+                </p>
+                <div id="driveModesPanel" class="drive-modes-panel">
+                  <article class="drive-mode-item">
+                    <h4>Sport</h4>
+                    <p id="modeSportText">Sharp throttle mapping with dynamic chassis response for spirited roads.</p>
+                  </article>
+                  <article class="drive-mode-item">
+                    <h4>Track</h4>
+                    <p id="modeTrackText">Maximum performance configuration with aggressive shift and aero profile.</p>
+                  </article>
+                  <article class="drive-mode-item">
+                    <h4>Comfort</h4>
+                    <p id="modeComfortText">Refined touring balance with smooth torque delivery and cabin composure.</p>
+                  </article>
+                </div>
+              </div>
+              <div class="driver-actions">
+                <button id="startEngineBtn" class="cta-button small">Start Engine</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-spacer"></div>
+      </div>
+      <aside class="specs-panel">
+        <h3>Performance Specifications</h3>
+        <div id="specsGrid" class="specs-grid"></div>
+        <div id="showcaseNarrative" class="showcase-narrative">
+          <article class="narrative-block">
+            <h4>Exterior Enhancement</h4>
+            <p id="exteriorEnhancementText">
+              Sculpted carbon architecture, widened stance geometry, and bespoke signature finish.
+            </p>
+          </article>
+          <article class="narrative-block">
+            <h4>Interior Craftsmanship</h4>
+            <p id="interiorCraftsmanshipText">
+              Hand-stitched upholstery, technical trim integration, and tailored ergonomic detailing.
+            </p>
+          </article>
+          <article class="narrative-block">
+            <h4>Aerodynamic Optimization</h4>
+            <p id="aerodynamicNotesText">
+              Rebalanced airflow management supports high-speed stability and cooling efficiency.
+            </p>
+          </article>
+          <article class="narrative-block narrative-notice">
+            <h4>Limited Production Notice</h4>
+            <p id="limitedProductionText">
+              Produced in strictly controlled numbers with individualized commissioning.
+            </p>
+          </article>
+        </div>
+        <div class="color-switcher">
+          <span>Colorway:</span>
+          <button class="color-dot active" data-color="#7f7f7f" aria-label="Graphite"></button>
+          <button class="color-dot" data-color="#d39a2c" aria-label="Gold"></button>
+          <button class="color-dot" data-color="#f26a2e" aria-label="Orange"></button>
+          <button class="color-dot" data-color="#ffffff" aria-label="Pearl White"></button>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="page page-about" aria-labelledby="aboutTitle">
+      <div class="about-visual"></div>
+      <div class="about-content">
+        <h2 id="aboutTitle">About Mansory</h2>
+        <p>
+          Mansory represents elite automotive customization where engineering precision meets handcrafted luxury.
+        </p>
+        <div class="timeline">
+          <article>
+            <h3>1989</h3>
+            <p>Foundation of Mansory with a mission to redefine bespoke luxury performance.</p>
+          </article>
+          <article>
+            <h3>2000s</h3>
+            <p>Global recognition through carbon-fiber body programs and complete interior transformations.</p>
+          </article>
+          <article>
+            <h3>Today</h3>
+            <p>Continuing to deliver ultra-exclusive commissions for the world's most demanding clients.</p>
+          </article>
+        </div>
+        <div class="values">
+          <span>Performance</span>
+          <span>Luxury</span>
+          <span>Exclusivity</span>
+        </div>
+        <div class="showroom-actions">
+          <button data-target="contact" class="cta-button small">Book a Consultation</button>
+          <button data-target="showroom" class="ghost-button">Back to Showroom</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="page page-team" aria-labelledby="teamTitle">
+      <div class="team-wrap">
+        <h2 id="teamTitle">TEAM</h2>
+        <p class="team-subtitle">Project Group Members</p>
+        <ol class="team-list">
+          <li>Nath Mansory Studioan Daniel (Dev)</li>
+          <li>Biniam Tsegaye</li>
+          <li>Yididya Belachew</li>
+          <li>Nath Mansory Studionael Dawit</li>
+          <li>Biruk Legese</li>
+          <li>Mikiyas Debebe</li>
+        </ol>
+      </div>
+      <div class="showroom-actions">
+        <button data-target="showroom" class="ghost-button">Back to Showroom</button>
+        <button data-target="landing" class="ghost-button">Return to Landing</button>
+      </div>
+    </section>
+
+    <section id="contact" class="page page-contact" aria-labelledby="contactTitle">
+      <div class="contact-wrap">
+        <h2 id="contactTitle">Book a Consultation</h2>
+        <form id="contactForm" class="contact-form">
+          <label>
+            Full Name
+            <input type="text" name="name" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required>
+          </label>
+          <label>
+            Interested Car
+            <select name="car" id="carSelect"></select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button type="submit" class="cta-button small">Submit Request</button>
+        </form>
+        <div class="contact-meta">
+          <h3>Contact & Social</h3>
+          <p>Phone: +49 (0) 9731 3030-0</p>
+          <p>Email: info@mansory.com</p>
+          <p>Website: mansory.com</p>
+          <p>Instagram: @mansory</p>
+          <div class="map-placeholder">Global Presence: Europe / Middle East / North America / Asia</div>
+        </div>
+      </div>
+      <div class="showroom-actions">
+        <button data-target="showroom" class="ghost-button">Back to Showroom</button>
+        <button data-target="landing" class="ghost-button">Return to Landing</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="customCursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="react-root" aria-label="React component mount point"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>

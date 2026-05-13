@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Team — MANSORY Digital Showroom" />
+        <title>Team — MANSORY Digital Showroom</title>
+
+        <!-- Fonts — identical to index.html -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Syncopate:wght@400;700&family=Barlow:wght@300;400;500;700&family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Same app.js as index.html — required per task spec -->
+        <script type="module" src="app.js"></script>
+
+        <!-- Same stylesheet as index.html -->
+        <link rel="stylesheet" href="styles.css" />
+
+        <style>
+            /* ── Standalone visibility override ──────────────────────────────────
+         styles.css hides .page elements; this ensures the standalone page
+         content is always visible regardless of SPA state changes.
+      ───────────────────────────────────────────────────────────────────── */
+            .page-standalone {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            /* ── Page wrapper ─────────────────────────────────────────────────── */
+            .tm-page {
+                min-height: 100vh;
+                padding: 0;
+            }
+
+            /* ── Hero ─────────────────────────────────────────────────────────── */
+            .tm-hero {
+                padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem)
+                    clamp(2.5rem, 5vw, 4rem);
+                text-align: center;
+            }
+            .tm-hero__eyebrow {
+                font-family: var(--font-display);
+                font-size: 0.62rem;
+                letter-spacing: 0.35em;
+                text-transform: uppercase;
+                color: #c8902a;
+                display: block;
+                margin-bottom: 1rem;
+            }
+            .tm-hero__title {
+                font-family: var(--font-display);
+                font-size: clamp(3rem, 10vw, 6rem);
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                margin: 0 0 1rem;
+                color: #0e1117;
+                line-height: 1;
+            }
+            .tm-hero__chip {
+                display: inline-block;
+                font-family: var(--font-display);
+                font-size: 0.58rem;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: #c8902a;
+                border: 1px solid rgba(200, 144, 42, 0.4);
+                border-radius: 999px;
+                padding: 0.35rem 1.1rem;
+                margin-bottom: 1.4rem;
+            }
+            .tm-hero__line {
+                width: 50px;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    #c8902a,
+                    transparent
+                );
+                margin: 0 auto 1.4rem;
+                border: none;
+            }
+            .tm-hero__sub {
+                font-size: clamp(0.88rem, 2vw, 1rem);
+                color: #5d636b;
+                max-width: 420px;
+                margin: 0 auto;
+                line-height: 1.6;
+                font-family: var(--font-ui);
+            }
+
+            /* ── Grid ─────────────────────────────────────────────────────────── */
+            .tm-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: clamp(1rem, 2.5vw, 1.75rem);
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 0 clamp(1.5rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem);
+            }
+            @media (max-width: 720px) {
+                .tm-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 440px) {
+                .tm-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* ── Cards ────────────────────────────────────────────────────────── */
+            .tm-card {
+                background: rgba(255, 255, 255, 0.72);
+                border: 1px solid rgba(200, 144, 42, 0.18);
+                border-radius: 1rem;
+                padding: clamp(1.4rem, 3vw, 2rem) clamp(1.2rem, 2.5vw, 1.6rem);
+                text-align: center;
+                transition:
+                    transform 0.25s ease,
+                    box-shadow 0.25s ease,
+                    border-color 0.25s ease;
+                position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(6px);
+            }
+            .tm-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(200, 144, 42, 0.5),
+                    transparent
+                );
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .tm-card:hover {
+                transform: translateY(-4px);
+                box-shadow:
+                    0 12px 36px rgba(200, 144, 42, 0.15),
+                    0 4px 12px rgba(0, 0, 0, 0.08);
+                border-color: rgba(200, 144, 42, 0.38);
+            }
+            .tm-card:hover::before {
+                opacity: 1;
+            }
+
+            /* ── Avatar ───────────────────────────────────────────────────────── */
+            .tm-card__avatar {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #c8902a, #e5ad45);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1rem;
+                font-family: var(--font-display);
+                font-size: 1.05rem;
+                color: #fff;
+                letter-spacing: 0.05em;
+                box-shadow: 0 4px 16px rgba(200, 144, 42, 0.3);
+                flex-shrink: 0;
+            }
+
+            /* ── Card number ──────────────────────────────────────────────────── */
+            .tm-card__number {
+                font-family: var(--font-display);
+                font-size: 0.52rem;
+                letter-spacing: 0.3em;
+                color: rgba(200, 144, 42, 0.65);
+                margin-bottom: 0.5rem;
+                display: block;
+            }
+
+            /* ── Name ─────────────────────────────────────────────────────────── */
+            .tm-card__name {
+                font-family: var(--font-display);
+                font-size: clamp(0.75rem, 1.8vw, 0.88rem);
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: #0e1117;
+                margin: 0 0 0.55rem;
+                line-height: 1.35;
+            }
+
+            /* ── Role badge ───────────────────────────────────────────────────── */
+            .tm-card__role {
+                display: inline-block;
+                font-family: var(--font-ui);
+                font-size: 0.72rem;
+                color: #5d636b;
+                background: rgba(200, 144, 42, 0.1);
+                border: 1px solid rgba(200, 144, 42, 0.2);
+                border-radius: 999px;
+                padding: 0.22rem 0.8rem;
+                letter-spacing: 0.03em;
+            }
+
+            /* ── Footer nav ───────────────────────────────────────────────────── */
+            .tm-footer {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                padding: 1.5rem clamp(1.5rem, 5vw, 5rem) 3rem;
+                flex-wrap: wrap;
+            }
+            .tm-footer a {
+                font-family: var(--font-display);
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                padding: 0.7rem 1.6rem;
+                border: 1px solid rgba(200, 144, 42, 0.35);
+                border-radius: 999px;
+                color: #5d636b;
+                text-decoration: none;
+                transition:
+                    border-color 0.2s,
+                    color 0.2s,
+                    background 0.2s;
+            }
+            .tm-footer a:hover {
+                border-color: #c8902a;
+                color: #c8902a;
+                background: rgba(200, 144, 42, 0.06);
+            }
+        </style>
+    </head>
+
+    <body class="light-theme">
+        <!-- ── SPA support elements ─────────────────────────────────────────────
+         transitionOverlay — used by runTransition() in app.js
+         soundToggle       — wired in bindEvents() / visible UI element
+    ──────────────────────────────────────────────────────────────────────── -->
+        <div id="transitionOverlay" class="transition-overlay"></div>
+        <button id="soundToggle" class="sound-toggle" aria-label="Toggle Sound">
+            Sound: Off
+        </button>
+
+        <!-- ── Hidden SPA stubs ──────────────────────────────────────────────────
+         app.js bindEvents() crashes at the first null .addEventListener() call.
+         These hidden stubs give app.js real DOM nodes to attach listeners to
+         so bindEvents() runs fully, correctly wiring soundToggle, customCursor,
+         and [data-target] navigation — none are visible or reachable by users.
+    ──────────────────────────────────────────────────────────────────────── -->
+        <button
+            id="enterShowroomBtn"
+            hidden
+            aria-hidden="true"
+            tabindex="-1"
+            style="display: none !important"
+        ></button>
+        <button
+            id="backToShowroom"
+            hidden
+            aria-hidden="true"
+            tabindex="-1"
+            style="display: none !important"
+        ></button>
+        <div
+            id="carGrid"
+            hidden
+            aria-hidden="true"
+            style="display: none !important"
+        ></div>
+        <div
+            id="showcaseScroll"
+            hidden
+            aria-hidden="true"
+            style="display: none !important"
+        ></div>
+        <button
+            id="startEngineBtn"
+            hidden
+            aria-hidden="true"
+            tabindex="-1"
+            style="display: none !important"
+        ></button>
+
+        <!-- ── Hidden contactForm stub ──────────────────────────────────────────
+             app.js bindEvents() calls contactForm.addEventListener("submit",…)
+             BEFORE calling wireCursor(). Without this element, contactForm is
+             null → throws → bindEvents() exits → wireCursor() is never reached
+             → the cursor's mousemove listener is never registered → cursor is
+             stuck and invisible. This stub fixes that with zero visible effect.
+        ──────────────────────────────────────────────────────────────────────── -->
+        <form
+            id="contactForm"
+            hidden
+            aria-hidden="true"
+            style="display: none !important"
+        >
+            <select id="carSelect"></select>
+        </form>
+
+        <!-- ── Navbar ────────────────────────────────────────────────────────────
+         Reuses .showroom-navbar class (already styled in styles.css).
+         Plain <a href> — no SPA data-target routing needed on standalone page.
+    ──────────────────────────────────────────────────────────────────────── -->
+        <nav class="showroom-navbar" aria-label="Site navigation">
+            <div class="navbar-brand">MANSORY</div>
+            <div class="navbar-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="consultation.html" class="nav-link">Consultation</a>
+                <a href="index.html" class="back-to-landing-btn">
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                    >
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </nav>
+
+        <!-- ── Main content ──────────────────────────────────────────────────────
+         .page-standalone overrides SPA display:none from styles.css.
+         .page and .page-team kept so all existing background/layout rules apply.
+    ──────────────────────────────────────────────────────────────────────── -->
+        <main
+            id="team"
+            class="tm-page page page-team page-standalone"
+            aria-labelledby="teamTitle"
+        >
+            <!-- Hero -->
+            <header class="tm-hero">
+                <span class="tm-hero__eyebrow">Project Collective</span>
+                <h1 id="teamTitle" class="tm-hero__title">Team</h1>
+                <span class="tm-hero__chip">08 Members</span>
+                <hr class="tm-hero__line" />
+                <p class="tm-hero__sub">
+                    The creative and technical force behind MANSORY Digital
+                    Showroom.
+                </p>
+            </header>
+
+            <!-- Member grid -->
+            <div class="tm-grid" role="list">
+                <!-- 01 — Nataw X Mansoryan Daniel -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">ND</div>
+                    <span class="tm-card__number">01</span>
+                    <h3 class="tm-card__name">Nathan Daniel</h3>
+                    <span class="tm-card__role">Lead Developer</span>
+                </article>
+
+                <!-- 02 — Biniam Tsegaye -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">BT</div>
+                    <span class="tm-card__number">02</span>
+                    <h3 class="tm-card__name">Biniam Tsegaye</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 03 — Yididya Belachew -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">YB</div>
+                    <span class="tm-card__number">03</span>
+                    <h3 class="tm-card__name">Yididya Belachew</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 04 — Nataw X Mansorynael Dawit (blue gradient to differentiate from card 01) -->
+                <article class="tm-card" role="listitem">
+                    <div
+                        class="tm-card__avatar"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #1a6fd6,
+                                #4a9eff
+                            );
+                        "
+                    >
+                        ND
+                    </div>
+                    <span class="tm-card__number">04</span>
+                    <h3 class="tm-card__name">Natnael Dawit</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 05 — Biruk Legese -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">BL</div>
+                    <span class="tm-card__number">05</span>
+                    <h3 class="tm-card__name">Biruk Legese</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 06 — Mikiyas Debebe -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">MD</div>
+                    <span class="tm-card__number">06</span>
+                    <h3 class="tm-card__name">Mikiyas Debebe</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 07 — Ruhama -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">RU</div>
+                    <span class="tm-card__number">07</span>
+                    <h3 class="tm-card__name">Ruhama</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+
+                <!-- 08 — Fikir -->
+                <article class="tm-card" role="listitem">
+                    <div class="tm-card__avatar">FI</div>
+                    <span class="tm-card__number">08</span>
+                    <h3 class="tm-card__name">Fikir</h3>
+                    <span class="tm-card__role">Team Member</span>
+                </article>
+            </div>
+            <!-- /.tm-grid -->
+
+            <!-- Footer navigation -->
+            <div class="tm-footer">
+                <a href="index.html">Return to Home</a>
+                <a href="consultation.html">Book a Consultation</a>
+            </div>
+        </main>
+        <!-- /.tm-page -->
+
+        <!-- ── Cursor & React root ──────────────────────────────────────────── -->
+        <div id="customCursor" class="custom-cursor" aria-hidden="true"></div>
+        <div id="react-root" aria-label="React component mount point"></div>
+
+        <!-- ── GSAP & Lenis ──────────────────────────────────────────────────────
+         Loaded WITHOUT defer (same as index.html) so window.gsap /
+         window.ScrollTrigger / window.Lenis are available before app.js runs.
+    ──────────────────────────────────────────────────────────────────────── -->
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    </body>
+</html>

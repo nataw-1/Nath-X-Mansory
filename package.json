@@ -1,0 +1,25 @@
+{
+  "name": "mansory-digital-showroom",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MANSORY Digital Showroom local static site runner",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host --port 5500",
+    "dev": "vite --host --port 5173",
+    "rundev": "npm run dev",
+    "build": "vite build",
+    "preview": "vite preview --host --port 5500"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "face-api.js": "^0.22.2",
+    "postprocessing": "^6.35.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "three": "^0.162.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
+  }
+}
