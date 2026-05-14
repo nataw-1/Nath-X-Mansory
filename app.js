@@ -2,7 +2,13 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { mountHeroGridScan } from "./src/react/bootstrap.jsx";
+import modelRollsRoyceCullinan from "./assets/models/rolls_royce_cullinan.glb";
+import modelKoenigseggOnePro from "./assets/models/koenigsegg_one_pro.glb";
+import modelPorsche911TurboS from "./assets/models/porsche_911_turbo_s.glb";
+import modelLamborghiniRevuelto from "./assets/models/free_lamborghini_revuelto.glb";
+import modelLamborghiniUrus from "./assets/models/modified_lamborghini_urus.glb";
+import modelBugattiBolide from "./assets/models/bugatti_bolide_2024.glb";
+import modelFerrari812Gts from "./assets/models/2020_ferrari_812_gts.glb";
 
 const cars = [
   {
@@ -14,7 +20,7 @@ const cars = [
       "Elevated V12 touring with executive-grade dynamic composure.",
     description:
       "A flagship commission blending stately presence with precision-tuned power delivery.",
-    modelUrl: "assets/models/rolls_royce_cullinan.glb",
+    modelUrl: modelRollsRoyceCullinan,
     modelScale: 1.35,
     engineAudioUrl: "assets/audio/phantom-engine.mp3",
     fallbackBodyColor: "#8f8f8f",
@@ -54,7 +60,7 @@ const cars = [
       "1600 hp twin-turbo V8 thrust with extreme aero-loaded high-speed stability.",
     description:
       "A bespoke hypercar program centered on extreme power density, low mass, and race-derived control systems.",
-    modelUrl: "assets/models/koenigsegg_one_pro.glb",
+    modelUrl: modelKoenigseggOnePro,
     modelScale: 1.12,
     modelTargetSize: 4.9,
     modelYOffset: 0.02,
@@ -96,7 +102,7 @@ const cars = [
       "900 hp flat-six powertrain with race-grade response and street-legal hypercar pace.",
     description:
       "A complete vehicle conversion of the Porsche 911 Turbo S (992), engineered for extreme output and limited-series exclusivity.",
-    modelUrl: "assets/models/porsche_911_turbo_s.glb",
+    modelUrl: modelPorsche911TurboS,
     modelScale: 1.1,
     modelTargetSize: 4.75,
     modelYOffset: 0.03,
@@ -138,7 +144,7 @@ const cars = [
       "1120 hp hybrid system output with carbon-focused aero and extreme launch performance.",
     description:
       "A one-of-one conversion that evolves the Carbonado lineage onto the Lamborghini Revuelto platform as an exclusive 2026 atelier statement.",
-    modelUrl: "assets/models/free_lamborghini_revuelto.glb",
+    modelUrl: modelLamborghiniRevuelto,
     modelScale: 1.12,
     modelTargetSize: 4.9,
     modelYOffset: 0.02,
@@ -180,7 +186,7 @@ const cars = [
       "900 hp twin-turbo V8 output with aggressive launch and high-speed stability.",
     description:
       "A full conversion based on the Urus S/Performante platform, tuned for extreme road presence and track-level acceleration.",
-    modelUrl: "assets/models/modified_lamborghini_urus.glb",
+    modelUrl: modelLamborghiniUrus,
     modelScale: 1.08,
     modelTargetSize: 4.4,
     modelYOffset: 0.02,
@@ -222,7 +228,7 @@ const cars = [
       "W16 quad-turbo power with lightweight, race-first engineering and extreme aero focus.",
     description:
       "A pure track machine engineered without road-legal constraints, built for maximum downforce, minimum mass, and elite lap-time performance.",
-    modelUrl: "assets/models/bugatti_bolide_2024.glb",
+    modelUrl: modelBugattiBolide,
     modelScale: 1.08,
     modelTargetSize: 4.95,
     modelYOffset: 0.03,
@@ -266,7 +272,7 @@ const cars = [
       "Naturally aspirated V12 ferocity with radical forged-carbon identity.",
     description:
       "The Stallone is a radical super-GT defined by dramatic carbon architecture and elite craftsmanship.",
-    modelUrl: "assets/models/2020_ferrari_812_gts.glb",
+    modelUrl: modelFerrari812Gts,
     modelScale: 1.16,
     engineAudioUrl: "assets/audio/ferrari-812-stallone-engine.mp3",
     fallbackBodyColor: "#b80f14",
@@ -757,15 +763,7 @@ function initLandingExperience() {
   wireLandingCardMicroMotion();
   initLandingGsapScenes();
   initLandingStatCounters();
-
-  // Mount the React GridScan background
-  try {
-    mountHeroGridScan();
-  } catch (e) {
-    console.warn("Failed to mount React GridScan:", e);
-  }
 }
-
 function splitLandingHeadline() {
   const title = document.getElementById("landingTitle");
   if (!(title instanceof HTMLElement) || title.dataset.split === "true") {
@@ -973,11 +971,12 @@ function initLandingGsapScenes() {
     });
     timeline.from(panel, {
       y: 28,
-      opacity: 0.1,
+      opacity: 0.72,
       scale: 0.992,
       duration: 1.12,
       ease: "power2.out",
       transformOrigin: "50% 50%",
+      immediateRender: false,
     });
     timeline.from(
       panel.querySelectorAll(
@@ -2938,3 +2937,11 @@ function createAudioSuite() {
       });
   } catch (e) { }
 })();
+
+
+
+
+
+
+
+

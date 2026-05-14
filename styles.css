@@ -10167,3 +10167,334 @@ body.light-theme .page-landing .landing-hero,
         padding: 0.24rem 0.38rem !important;
     }
 }
+/* Global Responsive Optimization Layer */
+html,
+body {
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.page-landing .scene-shell,
+.page-landing .landing-hero .hero-container,
+.page-showroom .showroom-floor,
+.page-showcase .showcase-shell,
+.page-contact .contact-shell {
+    width: min(100%, 1320px);
+    margin-inline: auto;
+}
+
+.page-landing .scene-panel {
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.page-landing .scene-shell {
+    padding-inline: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.page-showroom .showroom-floor {
+    padding-inline: clamp(0.9rem, 2vw, 1.8rem);
+}
+
+.page-showroom .showroom-hero {
+    padding-block: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.page-showroom .hero-content,
+.page-showroom .showroom-filter-bar,
+.page-showroom .showroom-grid-container,
+.page-showroom .showroom-cta,
+.page-showroom .showroom-footer {
+    width: min(100%, 1240px);
+    margin-inline: auto;
+}
+
+.page-showroom #carGrid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.page-showcase .showcase-shell {
+    padding-inline: clamp(0.85rem, 2.2vw, 1.8rem);
+}
+
+.page-showcase .showcase-top,
+.page-showcase .showcase-main,
+.page-showcase .showcase-details,
+.page-showcase .showcase-specs {
+    width: min(100%, 1280px);
+    margin-inline: auto;
+}
+
+@media (max-width: 1440px) {
+    .page-landing .scene-shell,
+    .page-landing .landing-hero .hero-container,
+    .page-showroom .showroom-floor,
+    .page-showcase .showcase-shell,
+    .page-contact .contact-shell {
+        width: min(100%, 1200px);
+    }
+
+    .page-landing .hero-headline {
+        font-size: clamp(2.3rem, 5.2vw, 4.6rem) !important;
+    }
+
+    .page-landing .hero-description {
+        max-width: 60ch !important;
+    }
+
+    .page-landing .scene-shell > h2,
+    .page-landing .scene-copy > h2,
+    .page-landing .final-shell > h2 {
+        font-size: clamp(1.85rem, 2.9vw, 2.85rem);
+    }
+}
+
+@media (max-width: 1200px) {
+    .page-landing .scene-shell,
+    .page-showroom .showroom-floor,
+    .page-showcase .showcase-shell {
+        width: min(100%, 1100px);
+    }
+
+    .page-landing .split-scene,
+    .page-landing .quote-layout {
+        gap: clamp(1rem, 2.6vw, 1.6rem);
+    }
+
+    .page-showroom .hero-stats-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .page-showroom #carGrid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .page-landing .scene-panel {
+        padding-block: clamp(2rem, 5.5vw, 3.6rem);
+    }
+
+    .page-landing .scene-shell,
+    .page-showroom .showroom-floor,
+    .page-showcase .showcase-shell,
+    .page-contact .contact-shell {
+        width: min(100%, 960px);
+        padding-inline: 0.9rem;
+    }
+
+    .page-landing .split-scene,
+    .page-landing .quote-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    .page-landing .scene-a .scene-media {
+        order: -1;
+    }
+
+    .page-landing .services-grid,
+    .page-landing .brand-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-landing .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-landing .hero-ctas {
+        width: min(100%, 540px);
+        margin-inline: auto;
+    }
+
+    .page-showroom .showroom-navbar {
+        padding-inline: 0.8rem;
+    }
+
+    .page-showroom .showroom-filter-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .page-showroom .filter-pill {
+        min-height: 40px;
+        padding-inline: 0.9rem;
+    }
+
+    .page-showcase .showcase-main {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-landing .landing-hero .hero-scroll-cue {
+        display: none;
+    }
+
+    .page-landing .scene-shell,
+    .page-showroom .showroom-floor,
+    .page-showcase .showcase-shell,
+    .page-contact .contact-shell {
+        width: 100%;
+        padding-inline: 0.75rem;
+    }
+
+    .page-landing .scene-shell > h2,
+    .page-landing .scene-copy > h2,
+    .page-landing .final-shell > h2 {
+        font-size: clamp(1.6rem, 7vw, 2.25rem);
+        line-height: 1.06;
+    }
+
+    .page-landing .services-grid,
+    .page-landing .brand-stats,
+    .page-landing .quote-highlights {
+        grid-template-columns: 1fr !important;
+    }
+
+    .page-landing .hero-ctas .btn-primary,
+    .page-landing .hero-ctas .btn-secondary,
+    .page-landing .hero-cta-row .cta-button,
+    .page-landing .hero-cta-row .ghost-button,
+    .page-landing .final-cta-row .ghost-button,
+    .page-landing .final-cta {
+        width: 100%;
+    }
+
+    .page-landing .hero-ctas,
+    .page-landing .hero-cta-row,
+    .page-landing .final-cta-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.56rem;
+        width: min(100%, 360px);
+        margin-inline: auto;
+    }
+
+    .page-landing .hero-trust-indicators,
+    .page-landing .hero-trust {
+        justify-content: center;
+        gap: 0.42rem;
+    }
+
+    .page-showroom .showroom-title-xl {
+        font-size: clamp(2rem, 12vw, 3.2rem);
+    }
+
+    .page-showroom .showroom-lede,
+    .page-showroom .hero-subtext {
+        font-size: 0.92rem;
+        line-height: 1.56;
+    }
+
+    .page-showroom .hero-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-showroom #carGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-showcase .showcase-top {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-landing .scene-panel {
+        padding-block: 1.7rem;
+    }
+
+    .page-landing .hero-description,
+    .page-landing .scene-shell > p,
+    .page-showroom .showroom-lede,
+    .page-showcase .showcase-overview,
+    .page-contact .contact-shell p {
+        font-size: 0.88rem;
+        line-height: 1.52;
+    }
+
+    .page-landing .service-card,
+    .page-landing .testimonial-card,
+    .page-landing .quote-intro,
+    .page-landing .lead-form,
+    .page-showroom #carGrid .car-card {
+        border-radius: 0.9rem;
+    }
+
+    .page-showroom .filter-pill,
+    .page-showroom #carGrid .car-card-button,
+    .page-landing .hero-ctas .btn-primary,
+    .page-landing .hero-ctas .btn-secondary,
+    .page-landing .final-cta {
+        min-height: 42px;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-landing .scene-shell,
+    .page-showroom .showroom-floor,
+    .page-showcase .showcase-shell,
+    .page-contact .contact-shell {
+        padding-inline: 0.6rem;
+    }
+
+    .page-landing .hero-headline {
+        font-size: clamp(1.55rem, 9vw, 2.15rem) !important;
+    }
+
+    .page-landing .hero-description {
+        font-size: 0.82rem !important;
+    }
+
+    .page-landing .hero-trust-indicators,
+    .page-landing .hero-trust {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .page-landing .hero-trust-indicators .trust-item,
+    .page-landing .hero-trust span {
+        justify-content: center;
+        font-size: 0.62rem !important;
+        min-height: 28px;
+        padding: 0.22rem 0.36rem !important;
+    }
+
+    .page-showroom .showroom-navbar {
+        gap: 0.45rem;
+    }
+
+    .page-showroom .navbar-links {
+        gap: 0.3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .page-showroom .hero-title-xl,
+    .page-showroom .hero-headline {
+        font-size: clamp(1.5rem, 8.8vw, 2rem);
+    }
+
+    .page-showroom .showroom-kpi,
+    .page-showroom .hero-stats-grid .stat-card {
+        padding: 0.72rem;
+    }
+}
