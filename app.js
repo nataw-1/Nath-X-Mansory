@@ -1144,8 +1144,9 @@ function initLandingStatCounters() {
     if (!Number.isFinite(target)) {
       return;
     }
+    const isDecimal = target % 1 !== 0;
     if (prefersReducedMotion.matches || !gsapLib || !scrollTriggerLib) {
-      node.textContent = String(Math.round(target));
+      node.textContent = isDecimal ? target.toFixed(1) : String(Math.round(target));
       return;
     }
     const counter = { value: 0 };
@@ -1154,7 +1155,7 @@ function initLandingStatCounters() {
       duration: 1.8,
       ease: "expo.out",
       onUpdate: () => {
-        node.textContent = String(Math.round(counter.value));
+        node.textContent = isDecimal ? counter.value.toFixed(1) : String(Math.round(counter.value));
       },
       scrollTrigger: {
         trigger: node,
