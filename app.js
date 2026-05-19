@@ -326,6 +326,7 @@ const landingRuntime = {
   lenis: null,
   lenisRAF: null,
   heroParallaxBound: false,
+  scrollRefreshBound: false,
 };
 
 const showroomScrollGuard = {
@@ -763,6 +764,7 @@ function initLandingExperience() {
   wireLandingCardMicroMotion();
   initLandingGsapScenes();
   initLandingStatCounters();
+  bindLandingScrollRefresh();
 }
 function splitLandingHeadline() {
   const title = document.getElementById("landingTitle");
@@ -797,8 +799,26 @@ function initLandingSmoothScroll() {
     lerp: 0.075,
   });
 
-  if (window.ScrollTrigger) {
-    lenis.on("scroll", () => window.ScrollTrigger.update());
+  const scrollTriggerLib = window.ScrollTrigger;
+  if (scrollTriggerLib) {
+    scrollTriggerLib.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+    scrollTriggerLib.addEventListener("refresh", () => lenis.resize());
+    lenis.on("scroll", () => scrollTriggerLib.update());
   }
 
   const raf = (time) => {
@@ -907,7 +927,7 @@ function initLandingGsapScenes() {
     },
   );
 
-  gsapLib.from(".hero-title", {
+  gsapLib.from(".hero-headline, .hero-title", {
     yPercent: 24,
     opacity: 0,
     duration: 1.05,
@@ -915,7 +935,7 @@ function initLandingGsapScenes() {
     delay: 0.18,
   });
   gsapLib.from(
-    ".brand-lockup, .hero-logo-badge, .hero-subtext, .hero-cta-row, .hero-trust, .hero-scroll-cue",
+    ".hero-badge, .hero-brand-name, .hero-premium-badges, .brand-lockup, .hero-logo-badge, .hero-subtext, .hero-cta-row, .hero-trust, .hero-scroll-cue",
     {
       y: 40,
       opacity: 0,
@@ -988,6 +1008,7 @@ function initLandingGsapScenes() {
         duration: 0.96,
         stagger: 0.06,
         ease: "expo.out",
+        immediateRender: false,
       },
       "-=0.76",
     );
@@ -1040,6 +1061,7 @@ function initLandingGsapScenes() {
           duration: 0.72,
           stagger: 0.05,
           ease: "expo.out",
+          immediateRender: false,
           clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: ".scene-b",
@@ -1060,6 +1082,7 @@ function initLandingGsapScenes() {
       opacity: 0,
       duration: 0.9,
       ease: "expo.out",
+      immediateRender: false,
       scrollTrigger: {
         trigger: el,
         start: "top 88%",
@@ -1079,6 +1102,7 @@ function initLandingGsapScenes() {
         opacity: 0,
         duration: 0.95,
         ease: "power2.out",
+        immediateRender: false,
         scrollTrigger: {
           trigger: el,
           start: "top 86%",
@@ -1086,6 +1110,29 @@ function initLandingGsapScenes() {
         },
       });
     });
+
+  scrollTriggerLib.refresh(true);
+}
+
+function bindLandingScrollRefresh() {
+  if (landingRuntime.scrollRefreshBound) {
+    return;
+  }
+  landingRuntime.scrollRefreshBound = true;
+
+  const refreshLandingScrollLayout = () => {
+    if (state.activePage !== "landing") {
+      return;
+    }
+    landingRuntime.lenis?.resize?.();
+    window.ScrollTrigger?.refresh?.();
+  };
+
+  window.addEventListener("resize", refreshLandingScrollLayout);
+  window.addEventListener("load", refreshLandingScrollLayout);
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(refreshLandingScrollLayout).catch(() => {});
+  }
 }
 
 function wireLandingCardMicroMotion() {

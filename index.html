@@ -18,6 +18,7 @@
         <script type="module" src="app.js"></script>
 
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="styles-hero-premium.css" />
     </head>
 
     <body class="light-theme">
@@ -35,7 +36,7 @@
             >
                 <div class="landing-film" data-cinematic-root>
                     <section
-                        class="landing-hero scene-panel scene-hero"
+                        class="landing-hero scene-panel scene-hero hero-premium"
                         data-scene="hero"
                     >
                         <div class="hero-background-layer" aria-hidden="true">
@@ -45,30 +46,56 @@
                             ></div>
                         </div>
 
+                        <div
+                            class="hero-edge-accent hero-edge-accent--left"
+                            aria-hidden="true"
+                        ></div>
+                        <div
+                            class="hero-edge-accent hero-edge-accent--right"
+                            aria-hidden="true"
+                        ></div>
+
+                        <header class="hero-lux-nav" aria-label="Landing navigation">
+                            <a class="hero-lux-nav__brand" href="#landing"
+                                >Nataw X</a
+                            >
+                            <nav class="hero-lux-nav__links">
+                                <a
+                                    class="hero-lux-nav__link is-active"
+                                    href="#landing"
+                                    >Showroom</a
+                                >
+                                <a
+                                    class="hero-lux-nav__link"
+                                    href="#scene-portfolio"
+                                    >Builds</a
+                                >
+                                <a
+                                    class="hero-lux-nav__link"
+                                    href="#scene-atelier"
+                                    >Atelier</a
+                                >
+                                <a
+                                    class="hero-lux-nav__link"
+                                    href="consultation.html"
+                                    >Commissions</a
+                                >
+                                <a
+                                    class="hero-lux-nav__link"
+                                    href="#scene-contact"
+                                    >Contact</a
+                                >
+                            </nav>
+                        </header>
+
+                        <div class="hero-stage">
                         <div class="hero-container">
                             <div class="hero-content-col hero-content-full">
                                 <div class="hero-badge">
-                                    <span>MANSORY DIGITAL SHOWROOM</span>
+                                    <span>Bespoke Digital Showroom</span>
                                 </div>
 
-                                <div class="hero-brand-mark">
-                                    <svg
-                                        viewBox="0 0 200 60"
-                                        aria-hidden="true"
-                                    >
-                                        <text
-                                            x="0"
-                                            y="45"
-                                            font-family="'Cormorant Garamond', serif"
-                                            font-size="48"
-                                            font-weight="700"
-                                            fill="currentColor"
-                                            letter-spacing="3"
-                                        >
-                                            Nataw X Mansory
-                                        </text>
-                                    </svg>
-                                </div>
+                                <p class="hero-brand-name">Nataw X</p>
 
                                 <h1 id="landingTitle" class="hero-headline">
                                     Elite Automotive<br />
@@ -98,8 +125,11 @@
                                             fill="none"
                                             stroke="currentColor"
                                             stroke-width="2"
+                                            aria-hidden="true"
                                         >
-                                            <path d="M5 12h14M12 5l7 7-7 7" />
+                                            <path
+                                                d="M5 12h14M12 5l7 7-7 7"
+                                            />
                                         </svg>
                                     </button>
                                     <a
@@ -109,62 +139,59 @@
                                         <span>Begin Your Commission</span>
                                     </a>
                                 </div>
-
-                                <div class="hero-trust-indicators">
-                                    <div class="trust-item">
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                        >
-                                            <path
-                                                d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
-                                            />
-                                            <polyline
-                                                points="22 4 12 14.01 9 11.01"
-                                            />
-                                        </svg>
-                                        <span>Limited Production</span>
-                                    </div>
-                                    <div class="trust-item">
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                        >
-                                            <circle cx="12" cy="12" r="10" />
-                                            <polyline
-                                                points="12 6 12 12 16 14"
-                                            />
-                                        </svg>
-                                        <span>15+ Years Legacy</span>
-                                    </div>
-                                    <div class="trust-item">
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                        >
-                                            <path
-                                                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-                                            />
-                                            <circle cx="9" cy="7" r="4" />
-                                            <path
-                                                d="M23 21v-2a4 4 0 0 0-3-3.87"
-                                            />
-                                            <path
-                                                d="M16 3.13a4 4 0 0 1 0 7.75"
-                                            />
-                                        </svg>
-                                        <span>Global Clientele</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
+                            <aside
+                                class="hero-premium-badges"
+                                aria-label="Atelier highlights"
+                            >
+                                <div class="hero-premium-badge">
+                                    <span>Handcrafted</span>
+                                </div>
+                                <div class="hero-premium-badge">
+                                    <span>One of One</span>
+                                </div>
+                                <div class="hero-premium-badge">
+                                    <span>Performance Atelier</span>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <aside
+                            class="hero-featured-builds"
+                            aria-label="Featured builds"
+                        >
+                            <p class="hero-featured-builds__title">
+                                Featured Builds
+                            </p>
+                            <div class="hero-featured-builds__grid">
+                                <figure class="hero-featured-build">
+                                    <img
+                                        src="assets/images/Mansory-Jesko.jpg"
+                                        alt="White hypercar commission"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </figure>
+                                <figure class="hero-featured-build">
+                                    <img
+                                        src="assets/images/Bugatti boldie.webp"
+                                        alt="Blue sports car commission"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </figure>
+                                <figure class="hero-featured-build">
+                                    <img
+                                        src="assets/images/mansory-cullinan.jpg"
+                                        alt="Black luxury SUV commission"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </figure>
+                            </div>
+                        </aside>
                         <p class="hero-scroll-cue" aria-hidden="true">Scroll</p>
                     </section>
 
@@ -350,6 +377,7 @@
                     </section>
 
                     <section
+                        id="scene-portfolio"
                         class="scene-panel scene-b"
                         data-scene="b"
                         aria-labelledby="sceneBTitle"
@@ -462,6 +490,7 @@
                     </section>
 
                     <section
+                        id="scene-atelier"
                         class="scene-panel scene-d"
                         data-scene="d"
                         aria-labelledby="sceneDTitle"
@@ -690,6 +719,7 @@
                     </section>
 
                     <section
+                        id="scene-contact"
                         class="scene-panel scene-final"
                         data-scene="final"
                         aria-labelledby="finalCtaTitle"

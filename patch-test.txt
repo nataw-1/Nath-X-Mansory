@@ -1,0 +1,7 @@
+﻿import fs from "node:fs";
+const path = "index.html";
+const html = fs.readFileSync(path, "utf8");
+const startIdx = html.indexOf('                        <div class="hero-container">');
+const endIdx = html.indexOf('                        <p class="hero-scroll-cue"', startIdx);
+if (startIdx === -1 || endIdx === -1) throw new Error("markers not found");
+const replacement = `                        <motion PLACEHOLDER`;
