@@ -404,7 +404,7 @@ function renderCars() {
     card.setAttribute("role", "listitem");
     card.style.setProperty("--card-index", String(index));
 
-     const imageSrc = car.id === "onepro" ? "assets/images/Mansory-Jesko.jpg" : car.id === "p9lm900" ? "assets/images/Mansory P9LM.webp" : car.id === "carbonadox" ? "assets/images/Carbonado X.webp" : car.id === "venatuss900" ? "assets/images/Ventus.webp" : car.id === "bolide2024" ? "assets/images/Bugatti boldie.webp" : car.id === "stallone812" ? "assets/images/Mansory stallone.jpg" : "assets/images/mansory-cullinan.jpg";
+     const imageSrc = car.id === "onepro" ? "assets/images/Mansory-Jesko.jpg" : car.id === "p9lm900" ? "assets/images/Mansory%20P9LM.webp" : car.id === "carbonadox" ? "assets/images/Carbonado%20X.webp" : car.id === "venatuss900" ? "assets/images/Ventus.webp" : car.id === "bolide2024" ? "assets/images/Bugatti%20boldie.webp" : car.id === "stallone812" ? "assets/images/Mansory%20stallone.jpg" : "assets/images/mansory-cullinan.jpg";
 
     card.innerHTML = `
       <div class="car-card-image">
