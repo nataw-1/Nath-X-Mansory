@@ -9,6 +9,25 @@ import modelLamborghiniRevuelto from "./assets/models/free_lamborghini_revuelto.
 import modelLamborghiniUrus from "./assets/models/modified_lamborghini_urus.glb";
 import modelBugattiBolide from "./assets/models/bugatti_bolide_2024.glb";
 import modelFerrari812Gts from "./assets/models/2020_ferrari_812_gts.glb";
+import showroomImgCullinan from "./assets/images/mansory-cullinan.jpg";
+import showroomImgJesko from "./assets/images/Mansory-Jesko.jpg";
+import showroomImgP9lm from "./assets/images/Mansory P9LM.webp";
+import showroomImgCarbonado from "./assets/images/Carbonado X.webp";
+import showroomImgVentus from "./assets/images/Ventus.webp";
+import showroomImgBugatti from "./assets/images/Bugatti boldie.webp";
+import showroomImgStallone from "./assets/images/Mansory stallone.jpg";
+import showroomImgRear from "./assets/images/mansory-rear.webp";
+
+const SHOWROOM_CARD_IMAGES = {
+  phantom: showroomImgCullinan,
+  onepro: showroomImgJesko,
+  p9lm900: showroomImgP9lm,
+  carbonadox: showroomImgCarbonado,
+  venatuss900: showroomImgVentus,
+  bolide2024: showroomImgBugatti,
+  stallone812: showroomImgStallone,
+};
+const SHOWROOM_IMAGE_FALLBACK = showroomImgRear;
 
 const cars = [
   {
@@ -305,6 +324,23 @@ const cars = [
   },
 ];
 
+let threeInitPromise = null;
+
+function resolveModelAssetUrl(modelUrl) {
+  if (modelUrl == null || modelUrl === "") {
+    return "";
+  }
+  const raw = String(modelUrl);
+  if (/^(https?:|blob:|data:)/i.test(raw)) {
+    return raw;
+  }
+  try {
+    return new URL(raw, window.location.href).href;
+  } catch {
+    return raw;
+  }
+}
+
 const state = {
   activePage: "landing",
   selectedCar: cars[0],
@@ -405,11 +441,12 @@ function renderCars() {
     card.setAttribute("role", "listitem");
     card.style.setProperty("--card-index", String(index));
 
-     const imageSrc = car.id === "onepro" ? "assets/images/Mansory-Jesko.jpg" : car.id === "p9lm900" ? "assets/images/Mansory P9LM.webp" : car.id === "carbonadox" ? "assets/images/Carbonado X.webp" : car.id === "venatuss900" ? "assets/images/Ventus.webp" : car.id === "bolide2024" ? "assets/images/Bugatti boldie.webp" : car.id === "stallone812" ? "assets/images/Mansory stallone.jpg" : "assets/images/mansory-cullinan.jpg";
+    const imageSrc =
+      SHOWROOM_CARD_IMAGES[car.id] || SHOWROOM_IMAGE_FALLBACK;
 
     card.innerHTML = `
       <div class="car-card-image">
-        <img src="${imageSrc}" alt="${car.name}" loading="lazy" onerror="this.src='assets/images/mansory-rear.webp'">
+        <img src="${imageSrc}" alt="${car.name}" loading="lazy" decoding="async">
       </div>
       <div class="car-card-content">
         <div class="car-card-top">
@@ -484,6 +521,7 @@ function bindEvents() {
       void landingPage.offsetWidth;
       landingPage.classList.add("exiting");
     }
+    initThreeStage();
     runTransition(
       () => {
         setActivePage("showroom");
@@ -524,14 +562,23 @@ function bindEvents() {
 
     playEngineHoverSweep();
 
+    const threeBoot = initThreeStage();
     if (state.threeReady && state.three) {
       state.three.preloadCar(selected, { priority: true });
+    } else if (threeBoot) {
+      threeBoot.then(() => {
+        state.three?.preloadCar(selected, { priority: true });
+      });
     }
 
-    // Instant transition to car showcase
-    setActivePage("carShowcase");
-    hydrateShowcase(selected);
-    syncShowcaseProgress();
+    runTransition(
+      () => {
+        setActivePage("carShowcase");
+        hydrateShowcase(selected);
+        syncShowcaseProgress();
+      },
+      { durationIn: 0.34, durationOut: 0.42 },
+    );
   });
 
   showcaseScroll.addEventListener("scroll", () => {
@@ -593,6 +640,7 @@ function bindEvents() {
     .getElementById("enterShowroomBtn")
     .addEventListener("mouseenter", playHoverEngine);
   wireCursor();
+  wireConciergeAssistant();
   wireReferenceInteractions();
   wireShowroomScrollGuard();
   wireProgressiveCarPreload();
@@ -705,7 +753,13 @@ function wireProgressiveCarPreload() {
   }
 
   const queuePreloadFromTarget = (rawTarget, priority = true) => {
-    if (!state.threeReady || !state.three || !(rawTarget instanceof Element)) {
+    if (!(rawTarget instanceof Element)) {
+      return;
+    }
+    if (!state.threeReady) {
+      initThreeStage();
+    }
+    if (!state.threeReady || !state.three) {
       return;
     }
     const trigger = rawTarget.closest("button[data-car-id]");
@@ -1000,7 +1054,7 @@ function initLandingGsapScenes() {
     });
     timeline.from(
       panel.querySelectorAll(
-        ".scene-eyebrow, h2, p, .scene-media, .brand-stats",
+        ".scene-eyebrow, h2, p, .scene-media, .brand-stats, .luxury-feature-pills",
       ),
       {
         y: 26,
@@ -1073,7 +1127,9 @@ function initLandingGsapScenes() {
     }
   }
 
-  gsapLib.utils.toArray(".service-card, .testimonial-card").forEach((el) => {
+  gsapLib.utils
+    .toArray(".luxury-feature-pill, .testimonial-card")
+    .forEach((el) => {
     if (!(el instanceof HTMLElement)) {
       return;
     }
@@ -1216,6 +1272,8 @@ let transitionGeneration = 0;
 
 function runTransition(onMidpoint, options = {}) {
   const variant = options.variant || "";
+  const durationIn = options.durationIn ?? 0.5;
+  const durationOut = options.durationOut ?? 0.6;
   const gsapLib = window.gsap;
 
   if (!gsapLib || !transitionOverlay) {
@@ -1231,15 +1289,15 @@ function runTransition(onMidpoint, options = {}) {
       if (token === transitionGeneration) {
         gsapLib.to(transitionOverlay, {
           opacity: 0,
-          duration: 0.6,
+          duration: durationOut,
           ease: "power2.inOut",
           onComplete: () => {
             transitionOverlay.classList.remove("active");
             if (variant) transitionOverlay.classList.remove(variant);
-          }
+          },
         });
       }
-    }
+    },
   });
 
   transitionOverlay.classList.add("active");
@@ -1247,11 +1305,11 @@ function runTransition(onMidpoint, options = {}) {
 
   tl.to(transitionOverlay, {
     opacity: 1,
-    duration: 0.5,
+    duration: durationIn,
     ease: "expo.inOut",
     onComplete: () => {
       onMidpoint();
-    }
+    },
   });
 }
 
@@ -1317,13 +1375,51 @@ function hydrateShowcase(car) {
       car.driveModes?.comfort || modeComfortText.textContent;
   }
 
-  if (state.threeReady && state.three) {
+  const applyThreeForCar = () => {
+    if (!state.threeReady || !state.three) {
+      return false;
+    }
     state.three.setImmersiveMode(immersiveMode);
     state.three.loadCar(car);
     state.three.setBodyColor(defaultColor);
-  } else if (stageScene) {
+    return true;
+  };
+
+  if (applyThreeForCar()) {
+    return;
+  }
+
+  const startInit = threeInitPromise || initThreeStage();
+  if (startInit) {
+    startInit
+      .then(() => {
+        if (state.selectedCar?.id !== car.id) {
+          return;
+        }
+        if (!applyThreeForCar() && stageScene) {
+          stageScene.classList.remove("model-loading");
+          stageScene.classList.add("model-ready", "fallback-active");
+          console.warn(
+            `[3D] Showcase opened for "${car.id}" but the renderer is unavailable.`,
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("[3D] Failed to initialize showcase renderer:", error);
+        if (stageScene) {
+          stageScene.classList.remove("model-loading");
+          stageScene.classList.add("model-ready", "fallback-active");
+        }
+      });
+    return;
+  }
+
+  if (stageScene) {
     stageScene.classList.remove("model-loading");
     stageScene.classList.add("model-ready", "fallback-active");
+    console.warn(
+      `[3D] WebGL unavailable — using fallback body for "${car.name}".`,
+    );
   }
 }
 
@@ -1437,21 +1533,33 @@ function wireCursor() {
     return;
   }
 
-  let cursorRaf = 0;
-  let pendingX = 0;
-  let pendingY = 0;
-  document.addEventListener("mousemove", (event) => {
-    pendingX = event.clientX;
-    pendingY = event.clientY;
-    if (cursorRaf) {
-      return;
-    }
-    cursorRaf = requestAnimationFrame(() => {
-      cursorRaf = 0;
-      customCursor.style.left = `${pendingX}px`;
-      customCursor.style.top = `${pendingY}px`;
-    });
-  });
+  let targetX = window.innerWidth * 0.5;
+  let targetY = window.innerHeight * 0.5;
+  let renderX = targetX;
+  let renderY = targetY;
+  let cursorLoop = 0;
+
+  document.addEventListener(
+    "mousemove",
+    (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+    },
+    { passive: true },
+  );
+
+  const tick = () => {
+    const ease = customCursor.classList.contains("showcase-hover")
+      ? 0.32
+      : customCursor.classList.contains("active")
+        ? 0.26
+        : 0.18;
+    renderX += (targetX - renderX) * ease;
+    renderY += (targetY - renderY) * ease;
+    customCursor.style.transform = `translate3d(${renderX}px, ${renderY}px, 0) translate(-50%, -50%)`;
+    cursorLoop = requestAnimationFrame(tick);
+  };
+  cursorLoop = requestAnimationFrame(tick);
 
   document
     .querySelectorAll("button, a, input, select, textarea")
@@ -1475,13 +1583,106 @@ function wireCursor() {
   }
 }
 
+function wireConciergeAssistant() {
+  const widget = document.getElementById("conciergeWidget");
+  const panel = document.getElementById("conciergePanel");
+  const toggle = document.getElementById("conciergeToggle");
+  const closeBtn = document.getElementById("conciergeClose");
+  const messagesEl = document.getElementById("conciergeMessages");
+  const inputEl = document.getElementById("conciergeInput");
+  const sendBtn = document.getElementById("conciergeSend");
+  if (
+    !(widget instanceof HTMLElement) ||
+    !(panel instanceof HTMLElement) ||
+    !(toggle instanceof HTMLButtonElement) ||
+    !(closeBtn instanceof HTMLButtonElement) ||
+    !(messagesEl instanceof HTMLElement) ||
+    !(inputEl instanceof HTMLInputElement) ||
+    !(sendBtn instanceof HTMLButtonElement)
+  ) {
+    return;
+  }
+
+  let isOpen = false;
+
+  const scrollMessagesToEnd = () => {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  };
+
+  const appendUserMessage = (text) => {
+    const bubble = document.createElement("article");
+    bubble.className = "concierge-message concierge-message--user";
+    bubble.innerHTML = `<span class="concierge-message-label">You</span>${escapeHtml(text)}`;
+    messagesEl.append(bubble);
+    requestAnimationFrame(scrollMessagesToEnd);
+  };
+
+  const sendUserMessage = () => {
+    const text = inputEl.value.trim();
+    if (!text) {
+      return;
+    }
+    appendUserMessage(text);
+    inputEl.value = "";
+    inputEl.focus();
+  };
+
+  const setOpen = (nextOpen) => {
+    isOpen = nextOpen;
+    widget.classList.toggle("is-open", isOpen);
+    panel.classList.toggle("is-open", isOpen);
+    panel.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    toggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close Nataw X Concierge" : "Open Nataw X Concierge",
+    );
+    if (isOpen) {
+      requestAnimationFrame(() => {
+        scrollMessagesToEnd();
+        inputEl.focus();
+      });
+    }
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!isOpen);
+  });
+  closeBtn.addEventListener("click", () => {
+    setOpen(false);
+  });
+
+  sendBtn.addEventListener("click", sendUserMessage);
+  inputEl.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendUserMessage();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen) {
+      setOpen(false);
+    }
+  });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function wireReferenceInteractions() {
   if (!window.matchMedia("(pointer: fine)").matches) {
     return;
   }
 
   const magneticTargets = document.querySelectorAll(
-    ".cta-button, .ghost-button, .top-back, .sound-toggle",
+    ".cta-button, .ghost-button, .top-back, .sound-toggle, .concierge-fab, .concierge-close, .concierge-send",
   );
   magneticTargets.forEach((target) => {
     if (
@@ -1767,7 +1968,15 @@ function animateRPMNeedle() {
   );
 }
 
-async function initThreeStage() {
+function initThreeStage() {
+  if (threeInitPromise) {
+    return threeInitPromise;
+  }
+  threeInitPromise = initThreeStageInternal();
+  return threeInitPromise;
+}
+
+async function initThreeStageInternal() {
   if (!threeViewport) {
     return;
   }
@@ -2211,24 +2420,31 @@ function createThreeManager({
     attachCar(procedural);
   }
 
+  function getCarModelAssetUrl(car) {
+    return resolveModelAssetUrl(car?.modelUrl);
+  }
+
   function prepareModelTemplate(car) {
-    if (!car?.modelUrl) {
-      return Promise.reject(new Error("Missing model URL"));
+    const assetUrl = getCarModelAssetUrl(car);
+    if (!assetUrl) {
+      const message = `[3D] "${car?.id || "unknown"}" has no modelUrl — cannot load GLB.`;
+      console.warn(message);
+      return Promise.reject(new Error(message));
     }
 
-    const cached = modelTemplateCache.get(car.modelUrl);
+    const cached = modelTemplateCache.get(assetUrl);
     if (cached) {
       return Promise.resolve(cached);
     }
 
-    const pending = modelTemplatePromiseCache.get(car.modelUrl);
+    const pending = modelTemplatePromiseCache.get(assetUrl);
     if (pending) {
       return pending;
     }
 
     const loadPromise = new Promise((resolve, reject) => {
       loader.load(
-        car.modelUrl,
+        assetUrl,
         (gltf) => {
           try {
             const template = gltf.scene;
@@ -2239,22 +2455,30 @@ function createThreeManager({
                 child.receiveShadow = false;
               }
             });
-            modelTemplateCache.set(car.modelUrl, template);
+            modelTemplateCache.set(assetUrl, template);
             resolve(template);
           } catch (error) {
+            console.error(
+              `[3D] Failed to prepare "${car.id}" after load (${assetUrl}):`,
+              error,
+            );
             reject(error);
           }
         },
         undefined,
         (error) => {
+          console.error(
+            `[3D] GLTF load failed for "${car.id}" (${assetUrl}):`,
+            error,
+          );
           reject(error);
         },
       );
     });
 
-    modelTemplatePromiseCache.set(car.modelUrl, loadPromise);
+    modelTemplatePromiseCache.set(assetUrl, loadPromise);
     loadPromise.finally(() => {
-      modelTemplatePromiseCache.delete(car.modelUrl);
+      modelTemplatePromiseCache.delete(assetUrl);
     });
     return loadPromise;
   }
@@ -2266,57 +2490,68 @@ function createThreeManager({
   function drainPreloadQueue() {
     while (!preloadInFlight && preloadQueue.length > 0) {
       const nextCar = preloadQueue.shift();
-      if (!nextCar) {
+      const assetUrl = getCarModelAssetUrl(nextCar);
+      if (!nextCar || !assetUrl) {
         continue;
       }
-      if (queuedPreloadUrls.has(nextCar.modelUrl)) {
+      if (
+        modelTemplateCache.has(assetUrl) ||
+        modelTemplatePromiseCache.has(assetUrl)
+      ) {
+        queuedPreloadUrls.delete(assetUrl);
         continue;
       }
-      queuedPreloadUrls.add(nextCar.modelUrl);
       preloadInFlight = true;
       prepareModelTemplate(nextCar)
-        .catch(() => { })
+        .catch((error) => {
+          console.warn(
+            `[3D] Background preload failed for "${nextCar.id}" (${assetUrl}):`,
+            error,
+          );
+        })
         .finally(() => {
+          queuedPreloadUrls.delete(assetUrl);
           preloadInFlight = false;
-          if (preloadQueue.length > 0) {
-            requestAnimationFrame(drainPreloadQueue);
-          }
+          requestAnimationFrame(drainPreloadQueue);
         });
+      return;
     }
   }
 
   function enqueueCarPreload(car, priority = false) {
-    if (!car?.modelUrl) {
+    const assetUrl = getCarModelAssetUrl(car);
+    if (!assetUrl) {
       return;
     }
     if (
-      modelTemplateCache.has(car.modelUrl) ||
-      modelTemplatePromiseCache.has(car.modelUrl) ||
-      queuedPreloadUrls.has(car.modelUrl)
+      modelTemplateCache.has(assetUrl) ||
+      modelTemplatePromiseCache.has(assetUrl) ||
+      queuedPreloadUrls.has(assetUrl)
     ) {
       return;
     }
+    queuedPreloadUrls.add(assetUrl);
     if (priority) {
       preloadQueue.unshift(car);
     } else {
       preloadQueue.push(car);
     }
-    queuedPreloadUrls.add(car.modelUrl);
     drainPreloadQueue();
   }
 
   function prioritizeCarPreload(car) {
-    if (!car?.modelUrl) {
+    const assetUrl = getCarModelAssetUrl(car);
+    if (!assetUrl) {
       return;
     }
     if (
-      modelTemplateCache.has(car.modelUrl) ||
-      modelTemplatePromiseCache.has(car.modelUrl)
+      modelTemplateCache.has(assetUrl) ||
+      modelTemplatePromiseCache.has(assetUrl)
     ) {
       return;
     }
     const queuedIndex = preloadQueue.findIndex(
-      (entry) => entry.modelUrl === car.modelUrl,
+      (entry) => getCarModelAssetUrl(entry) === assetUrl,
     );
     if (queuedIndex > 0) {
       const [entry] = preloadQueue.splice(queuedIndex, 1);
@@ -2349,7 +2584,10 @@ function createThreeManager({
       loadingEl.textContent = `Loading ${car.name}...`;
     }
 
-    const cachedTemplate = modelTemplateCache.get(car.modelUrl);
+    const assetUrl = getCarModelAssetUrl(car);
+    const cachedTemplate = assetUrl
+      ? modelTemplateCache.get(assetUrl)
+      : null;
     if (cachedTemplate) {
       attachCar(clonePreparedModel(cachedTemplate));
       if (immersiveMode) {
@@ -2405,7 +2643,10 @@ function createThreeManager({
               : String(error || "Unknown loader error");
           loadingEl.textContent = `3D load failed (${reason}). Showing fallback body.`;
         }
-        console.error(`Failed to load ${car.modelUrl}:`, error);
+        console.error(
+          `[3D] Failed to load "${car.id}" (${assetUrl || car.modelUrl}):`,
+          error,
+        );
       });
   }
 
@@ -2750,6 +2991,8 @@ function createThreeManager({
     }
   }
 
+  scheduleModelWarmup();
+
   return {
     loadCar,
     preloadCar,
@@ -2893,19 +3136,9 @@ function createAudioSuite() {
     initLandingExperience();
   } catch (e) { }
 
-  // Initialize 3D stage for car showcase
+  // Initialize 3D stage for car showcase (warmup runs inside createThreeManager)
   try {
-    initThreeStage().then(() => {
-      if (state.threeReady && state.three) {
-        // Preload all car models in background
-        enqueueCarPreload(state.selectedCar, true);
-        cars.forEach((car) => {
-          if (car.id !== state.selectedCar.id) {
-            enqueueCarPreload(car, false);
-          }
-        });
-      }
-    });
+    initThreeStage();
   } catch (e) { }
 
   // Showroom filter functionality

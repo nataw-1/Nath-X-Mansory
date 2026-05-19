@@ -2611,7 +2611,8 @@ textarea:focus {
     height: 22px;
     border-radius: 50%;
     border: 1px solid rgba(211, 154, 44, 0.95);
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
+    will-change: transform;
     pointer-events: none;
     z-index: 10000;
     transition:
@@ -8180,79 +8181,90 @@ body.landing-active {
     flex-shrink: 0 !important;
 }
 
-/* ========== Services Section ========== */
-.page-landing .scene-a .services-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 1.5rem !important;
-    margin-top: 2.5rem !important;
+/* ========== Services — Luxury Feature Pills ========== */
+.page-landing .scene-a .luxury-feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 0.75rem;
+    margin: 1.65rem 0 0;
+    padding: 0;
+    list-style: none;
 }
 
-.page-landing .service-card {
-    position: relative !important;
-    padding: 2rem 1.5rem !important;
-    border-radius: 1.5rem !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05) !important;
-    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
-    text-align: center !important;
-    overflow: hidden !important;
+.page-landing .scene-a .luxury-feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.58rem 1.05rem 0.58rem 0.82rem;
+    border-radius: 999px;
+    border: 1px solid rgba(211, 154, 44, 0.22);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(248, 250, 255, 0.78)
+        );
+    box-shadow:
+        0 8px 22px rgba(16, 24, 40, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(18, 22, 32, 0.88);
+    white-space: nowrap;
+    cursor: default;
+    transition:
+        transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.32s ease,
+        border-color 0.32s ease,
+        background 0.32s ease;
 }
 
-.page-landing .service-card::before {
-    display: none !important;
+.page-landing .scene-a .luxury-feature-pill__gem {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    transform: rotate(45deg);
+    border: 1px solid rgba(211, 154, 44, 0.65);
+    background: rgba(211, 154, 44, 0.2);
+    box-shadow: 0 0 10px rgba(211, 154, 44, 0.35);
 }
 
-.page-landing .service-card:hover {
-    transform: translateY(-10px) !important;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.1) !important;
-    border-color: rgba(211, 154, 44, 0.25) !important;
+.page-landing .scene-a .luxury-feature-pill:hover {
+    transform: translateY(-2px);
+    border-color: rgba(211, 154, 44, 0.45);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.98),
+        rgba(255, 248, 236, 0.88)
+    );
+    box-shadow:
+        0 12px 28px rgba(16, 24, 40, 0.12),
+        0 0 20px rgba(211, 154, 44, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.page-landing .service-icon {
-    width: 52px !important;
-    height: 52px !important;
-    margin: 0 auto 1.2rem !important;
-    color: var(--gold) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
+@media (max-width: 768px) {
+    .page-landing .scene-a .luxury-feature-pills {
+        gap: 0.55rem;
+        margin-top: 1.35rem;
+    }
 
-.page-landing .service-icon svg {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.page-landing .service-card h3 {
-    font-family: var(--font-display) !important;
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.06em !important;
-    text-transform: uppercase !important;
-    color: #111 !important;
-    margin: 0 0 0.8rem !important;
-}
-
-.page-landing .service-card p {
-    margin: 0 !important;
-    font-size: 0.95rem !important;
-    line-height: 1.65 !important;
-    color: rgba(60, 60, 60, 0.75) !important;
-}
-
-/* Responsive Services */
-@media (max-width: 1024px) {
-    .page-landing .scene-a .services-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
+    .page-landing .scene-a .luxury-feature-pill {
+        font-size: 0.64rem;
+        padding: 0.5rem 0.85rem 0.5rem 0.72rem;
+        letter-spacing: 0.1em;
     }
 }
 
-@media (max-width: 600px) {
-    .page-landing .scene-a .services-grid {
-        grid-template-columns: 1fr !important;
+@media (max-width: 480px) {
+    .page-landing .scene-a .luxury-feature-pill {
+        white-space: normal;
+        text-align: left;
+        max-width: 100%;
     }
 }
 
@@ -10311,7 +10323,6 @@ canvas {
         order: -1;
     }
 
-    .page-landing .services-grid,
     .page-landing .brand-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -10365,7 +10376,6 @@ canvas {
         line-height: 1.06;
     }
 
-    .page-landing .services-grid,
     .page-landing .brand-stats,
     .page-landing .quote-highlights {
         grid-template-columns: 1fr !important;
@@ -10434,7 +10444,7 @@ canvas {
         line-height: 1.52;
     }
 
-    .page-landing .service-card,
+    .page-landing .luxury-feature-pill,
     .page-landing .testimonial-card,
     .page-landing .quote-intro,
     .page-landing .lead-form,
